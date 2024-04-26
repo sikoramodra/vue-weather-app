@@ -8,8 +8,9 @@ const props = defineProps({
 });
 
 const cityList = ref();
+const showList = ref(false);
 
-defineEmits(['update:q']);
+const emit = defineEmits(['update:q', 'update:city']);
 
 const fetchCityData = async (q) => {
   try {
@@ -25,12 +26,22 @@ const fetchCityData = async (q) => {
   }
 };
 
+const autocomplete = (name, lat, lon) => {
+  emit('update:city', { name, lat, lon });
+  emit('update:q', null);
+  showList.value = false;
+  cityList.value = null;
+};
+
 watch(
   () => props.q,
   async () => {
     if (props.q) {
       cityList.value = await fetchCityData(props.q);
-      console.log(cityList.value);
+      showList.value = true;
+    } else {
+      showList.value = false;
+      cityList.value = null;
     }
   },
 );
@@ -64,6 +75,7 @@ watch(
       @input="$emit('update:q', $event.target.value)"
     />
     <div
+      v-if="showList"
       id="dropdown-menu"
       class="absolute left-0 w-full mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-1 space-y-1"
     >
@@ -71,6 +83,7 @@ watch(
         class="block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md"
         v-for="(city, index) in cityList"
         :key="index"
+        @click="autocomplete(city.name, city.lat, city.lon)"
       >
         {{ city.name }}
       </p>
