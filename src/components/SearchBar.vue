@@ -33,6 +33,15 @@ const autocomplete = (name, lat, lon) => {
   cityList.value = null;
 };
 
+const inputFocusOut = (event) => {
+  if (
+    event.relatedTarget !== document.querySelector('input') &&
+    event.relatedTarget !== document.querySelector('div[tabindex="0"]')
+  ) {
+    emit('update:q', null);
+  }
+};
+
 watch(
   () => props.q,
   async () => {
@@ -53,11 +62,7 @@ watch(
       class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
     >
       <!-- TODO: here goes spinner for geolocation api -->
-      <svg
-        class="w-4 h-4 text-gray-500 dark:text-gray-400"
-        fill="none"
-        viewBox="0 0 20 20"
-      >
+      <svg class="w-4 h-4 text-gray-400 z-20" fill="none" viewBox="0 0 20 20">
         <path
           stroke="currentColor"
           stroke-linecap="round"
@@ -69,24 +74,33 @@ watch(
     </div>
     <input
       type="text"
-      class="outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      class="outline-none bg-gray-50/70 border placeholder-gray-400 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700/70 backdrop-blur-md dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       placeholder="Search for city"
       :value="q"
       @input="$emit('update:q', $event.target.value)"
+      @focusout="inputFocusOut"
     />
     <div
+      tabindex="0"
       v-if="showList"
       id="dropdown-menu"
-      class="absolute left-0 w-full mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-1 space-y-1"
+      class="absolute left-0 w-full mt-2 rounded-lg shadow-lg bg-gray-50/70 dark:bg-gray-700/70 backdrop-blur-md p-1 space-y-1"
     >
-      <p
-        class="block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md"
-        v-for="(city, index) in cityList"
-        :key="index"
-        @click="autocomplete(city.name, city.lat, city.lon)"
-      >
-        {{ city.name }}
-      </p>
+      <template v-if="cityList.length !== 0">
+        <p
+          class="block px-4 py-2 text-gray-900 dark:text-white hover:bg-gray-700/30 cursor-pointer rounded-lg"
+          v-for="(city, index) in cityList"
+          :key="index"
+          @click="autocomplete(city.name, city.lat, city.lon)"
+        >
+          {{ city.name }}
+        </p>
+      </template>
+      <template v-else>
+        <p class="block px-4 py-2 text-gray-400 dark:text-white rounded-lg">
+          No cities found
+        </p>
+      </template>
     </div>
   </div>
 </template>
