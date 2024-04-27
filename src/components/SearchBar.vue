@@ -87,7 +87,7 @@ watch(
       tabindex="0"
       v-if="showList"
       id="dropdown-menu"
-      class="absolute left-0 mt-2 w-full space-y-1 rounded-lg bg-gray-50/70 p-1 shadow-lg backdrop-blur-md dark:bg-gray-700/70"
+      class="absolute left-0 mt-2 w-full space-y-1 rounded-lg bg-gray-50/20 p-1 shadow-lg backdrop-blur-md dark:backdrop-blur-md dark:bg-gray-700/70"
     >
       <template v-if="cityList.length !== 0">
         <p

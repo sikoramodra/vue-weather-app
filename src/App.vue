@@ -2,6 +2,7 @@
 import LocationCard from '@/components/LocationCard.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import { reactive, ref } from 'vue';
+import WeatherWidget from "@/components/WeatherWidget.vue";
 
 const q = ref();
 const city = reactive({
@@ -24,4 +25,7 @@ const updateCity = ({ name, lat, lon }) => {
     <LocationCard :city="city" />
     <SearchBar v-model:q="q" @update:city="updateCity" />
   </header>
+  <main class="dark:bg-gray-400 bg-gray-100 flex-grow grid place-items-center">
+    <WeatherWidget />
+  </main>
 </template>
