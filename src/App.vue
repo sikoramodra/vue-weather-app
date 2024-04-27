@@ -19,7 +19,7 @@ const updateCity = ({ name, lat, lon }) => {
 
 <template>
   <header
-    class="bg-gray-300 dark:bg-gray-600 h-24 w-full flex justify-evenly items-center"
+    class="flex h-24 w-full items-center justify-evenly bg-gray-300 dark:bg-gray-600"
   >
     <LocationCard :city="city" />
     <SearchBar v-model:q="q" @update:city="updateCity" />

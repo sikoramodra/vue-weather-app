@@ -57,12 +57,12 @@ watch(
 </script>
 
 <template>
-  <div class="relative w-full mx-4 min-w-64">
+  <div class="relative mx-4 w-full min-w-64">
     <div
-      class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+      class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3"
     >
       <!-- TODO: here goes spinner for geolocation api -->
-      <svg class="w-4 h-4 text-gray-400 z-20" fill="none" viewBox="0 0 20 20">
+      <svg class="z-20 h-4 w-4 text-gray-400" fill="none" viewBox="0 0 20 20">
         <path
           stroke="currentColor"
           stroke-linecap="round"
@@ -74,7 +74,7 @@ watch(
     </div>
     <input
       type="text"
-      class="outline-none bg-gray-50/70 border placeholder-gray-400 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700/70 backdrop-blur-md dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      class="block w-full rounded-lg border border-gray-300 bg-gray-50/70 p-2.5 ps-10 text-sm text-gray-900 placeholder-gray-400 outline-none backdrop-blur-md focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700/70 dark:text-white dark:focus:border-blue-500 dark:focus:ring-blue-500"
       placeholder="Search for city"
       :value="q"
       @input="$emit('update:q', $event.target.value)"
@@ -84,11 +84,11 @@ watch(
       tabindex="0"
       v-if="showList"
       id="dropdown-menu"
-      class="absolute left-0 w-full mt-2 rounded-lg shadow-lg bg-gray-50/70 dark:bg-gray-700/70 backdrop-blur-md p-1 space-y-1"
+      class="absolute left-0 mt-2 w-full space-y-1 rounded-lg bg-gray-50/70 p-1 shadow-lg backdrop-blur-md dark:bg-gray-700/70"
     >
       <template v-if="cityList.length !== 0">
         <p
-          class="block px-4 py-2 text-gray-900 dark:text-white hover:bg-gray-700/30 cursor-pointer rounded-lg"
+          class="block cursor-pointer rounded-lg px-4 py-2 text-gray-900 hover:bg-gray-700/30 dark:text-white"
           v-for="(city, index) in cityList"
           :key="index"
           @click="autocomplete(city.name, city.lat, city.lon)"
@@ -97,7 +97,7 @@ watch(
         </p>
       </template>
       <template v-else>
-        <p class="block px-4 py-2 text-gray-400 dark:text-white rounded-lg">
+        <p class="block rounded-lg px-4 py-2 text-gray-400 dark:text-white">
           No cities found
         </p>
       </template>

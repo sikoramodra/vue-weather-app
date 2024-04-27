@@ -9,7 +9,7 @@ defineProps({
 
 <template>
   <div
-    class="bg-gray-50/70 dark:bg-gray-700/70 dark:text-gray-400 backdrop-blur-md h-min p-2 ml-4 text-sm rounded-lg min-w-fit"
+    class="ml-4 h-min min-w-fit rounded-lg bg-gray-50/70 p-2 text-sm backdrop-blur-md dark:bg-gray-700/70 dark:text-gray-400"
   >
     <h2>{{ city.name }}</h2>
     <p><em class="dark:text-white">lat: </em>{{ city.lat }}</p>
