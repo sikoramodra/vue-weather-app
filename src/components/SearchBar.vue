@@ -61,8 +61,11 @@ watch(
     <div
       class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3"
     >
-      <!-- TODO: here goes spinner for geolocation api -->
-      <svg class="z-20 h-4 w-4 text-gray-400" fill="none" viewBox="0 0 20 20">
+      <svg
+        class="z-20 h-4 w-4 text-gray-500 dark:text-gray-400"
+        fill="none"
+        viewBox="0 0 20 20"
+      >
         <path
           stroke="currentColor"
           stroke-linecap="round"
@@ -74,7 +77,7 @@ watch(
     </div>
     <input
       type="text"
-      class="block w-full rounded-lg border border-gray-300 bg-gray-50/70 p-2.5 ps-10 text-sm text-gray-900 placeholder-gray-400 outline-none backdrop-blur-md focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700/70 dark:text-white dark:focus:border-blue-500 dark:focus:ring-blue-500"
+      class="block w-full rounded-lg border border-gray-300 bg-gray-50/70 p-2.5 ps-10 text-sm text-gray-900 placeholder-gray-500 outline-none backdrop-blur-md focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700/70 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
       placeholder="Search for city"
       :value="q"
       @input="$emit('update:q', $event.target.value)"
@@ -88,7 +91,7 @@ watch(
     >
       <template v-if="cityList.length !== 0">
         <p
-          class="block cursor-pointer rounded-lg px-4 py-2 text-gray-900 hover:bg-gray-700/30 dark:text-white"
+          class="block cursor-pointer rounded-lg px-4 py-2 text-gray-900 hover:bg-gray-300/30 dark:text-white dark:hover:bg-gray-700/30"
           v-for="(city, index) in cityList"
           :key="index"
           @click="autocomplete(city.name, city.lat, city.lon)"
@@ -97,7 +100,7 @@ watch(
         </p>
       </template>
       <template v-else>
-        <p class="block rounded-lg px-4 py-2 text-gray-400 dark:text-white">
+        <p class="block rounded-lg px-4 py-2 text-gray-500 dark:text-white">
           No cities found
         </p>
       </template>
