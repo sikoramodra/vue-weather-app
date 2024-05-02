@@ -73,15 +73,12 @@ watch(
 </script>
 
 <template>
-  <!-- TODO: Theme -->
   <div
     class="container mx-auto flex w-full max-w-3xl flex-wrap justify-center px-6"
     v-if="!loading"
   >
     <div class="flex w-full rounded-lg">
-      <div
-        class="w-full rounded-lg bg-blue-400 py-6 pl-8 pr-32 text-white opacity-90"
-      >
+      <div class="w-full rounded-lg bg-blue-400 py-6 pl-8 pr-32 text-white">
         <!-- TODO: dynamic background -->
         <div class="mb-12">
           <h2 class="pb-1 text-3xl font-bold leading-none">
@@ -129,27 +126,25 @@ watch(
       </div>
     </div>
 
-    <!--      checked above-->
-
     <div class="flex w-full">
       <div
-        class="mx-3 w-full rounded-b-lg bg-gray-300 p-8 text-white dark:bg-gray-600"
+        class="mx-3 w-full rounded-b-lg bg-gray-300 p-8 dark:bg-gray-600 dark:text-white"
       >
         <div class="mb-4 flex w-full justify-between">
-          <div class="text-90 w-auto font-bold uppercase">Clouds</div>
+          <div class="w-auto font-bold uppercase">Clouds</div>
           <div class="w-auto text-right">{{ cityCurrent.clouds.all }} %</div>
         </div>
         <div class="mb-4 flex w-full justify-between">
-          <div class="text-90 w-auto font-bold uppercase">Humidity</div>
+          <div class="w-auto font-bold uppercase">Humidity</div>
           <div class="w-auto text-right">{{ cityCurrent.main.humidity }} %</div>
         </div>
         <div class="mb-8 flex w-full justify-between">
-          <div class="text-90 w-auto font-bold uppercase">Wind</div>
+          <div class="w-auto font-bold uppercase">Wind</div>
           <div class="w-auto text-right">{{ cityCurrent.wind.speed }} m/s</div>
         </div>
         <div class="flex flex-row gap-3">
           <div
-            class="flex w-1/4 flex-col items-center rounded-lg bg-gray-700/70 pb-4 text-white"
+            class="flex w-1/4 flex-col items-center rounded-lg bg-gray-50/30 pb-4 dark:bg-gray-700/70"
             v-for="(forecast, index) in cityForecast.list"
             :key="index"
           >

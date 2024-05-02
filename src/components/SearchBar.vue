@@ -78,7 +78,7 @@ watch(
     </div>
     <input
       type="text"
-      class="block w-full rounded-lg border border-gray-300 bg-gray-50/70 p-2.5 ps-10 text-sm text-gray-900 placeholder-gray-500 outline-none backdrop-blur-md focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700/70 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+      class="block w-full rounded-lg border border-gray-300 bg-gray-50/30 p-2.5 ps-10 text-sm text-gray-900 placeholder-gray-500 outline-none backdrop-blur-md focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700/70 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
       placeholder="Search for city"
       :value="q"
       @input="$emit('update:q', $event.target.value)"
