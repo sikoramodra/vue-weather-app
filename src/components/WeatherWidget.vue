@@ -58,6 +58,21 @@ const formatDate = (dt, tz, format) => {
   return date.toLocaleDateString('pl-PL', format);
 };
 
+const getWeatherColor = (weatherGroup) => {
+  const weatherColors = {
+    Thunderstorm: 'bg-blue-600/30',
+    Drizzle: 'bg-blue-400/30',
+    Rain: 'bg-blue-500/30',
+    Snow: 'bg-white/30',
+    Clear: 'bg-yellow-500/30',
+    Clouds: 'bg-gray-300/30',
+    Other: 'bg-gray-500/30',
+  };
+
+  const key = Object.keys(weatherColors).find((key) => key === weatherGroup);
+  return weatherColors[key] || weatherColors.Other;
+};
+
 watch(
   () => props.city,
   async () => {
@@ -78,8 +93,10 @@ watch(
   >
     <template v-if="!loading">
       <div class="flex w-full rounded-lg">
-        <div class="w-full rounded-lg bg-blue-400 py-6 pl-8 pr-32 text-white">
-          <!-- TODO: dynamic background -->
+        <div
+          class="w-full rounded-lg py-6 pl-8 pr-32 text-white"
+          :class="getWeatherColor(cityCurrent.weather[0].main)"
+        >
           <div class="mb-12">
             <h2 class="pb-1 text-3xl font-bold leading-none">
               {{
