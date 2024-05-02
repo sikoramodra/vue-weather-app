@@ -18,9 +18,10 @@ const fetchCityData = async (q) => {
       `https://api.openweathermap.org/geo/1.0/direct?appid=deaf4353cc00ef0e58e1fe493454be49&q=${q}&limit=5`,
     );
     if (!response.ok) {
-      throw new Error(`Failed to fetch city: ${q}`);
+      console.error(`Failed to fetch city: ${q}`);
+      return;
     }
-    return await response.json();
+    cityList.value = await response.json();
   } catch (e) {
     console.error(e.message);
   }
@@ -46,7 +47,7 @@ watch(
   () => props.q,
   async () => {
     if (props.q) {
-      cityList.value = await fetchCityData(props.q);
+      await fetchCityData(props.q);
       showList.value = true;
     } else {
       showList.value = false;
@@ -87,7 +88,7 @@ watch(
       tabindex="0"
       v-if="showList"
       id="dropdown-menu"
-      class="absolute left-0 mt-2 w-full space-y-1 rounded-lg bg-gray-50/20 p-1 shadow-lg backdrop-blur-md dark:backdrop-blur-md dark:bg-gray-700/70"
+      class="absolute left-0 z-20 mt-2 w-full space-y-1 rounded-lg bg-gray-50/20 p-1 shadow-lg backdrop-blur-md dark:bg-gray-700/70 dark:backdrop-blur-md"
     >
       <template v-if="cityList.length !== 0">
         <p
